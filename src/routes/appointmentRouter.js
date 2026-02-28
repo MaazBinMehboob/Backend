@@ -43,4 +43,4 @@ router.get(
   getPatientAppointments
 );
 
-export default router;
+export { router as appointmentRouter };

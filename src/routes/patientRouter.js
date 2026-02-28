@@ -43,4 +43,4 @@ patientRouter.put(
   updatePatient
 );
 
-export default patientRouter;
+export { patientRouter };

@@ -6,8 +6,8 @@ import { fileRouter } from './routes/fileRouter.js'
 import cookieParser from 'cookie-parser'
 import AuthMiddleware from './middleware/authMiddleware.js'
 import cors from 'cors';
-import PatientRouter from './routes/patientRouter.js'
-import appointmentRouter from "./routes/appointmentRouter.js";
+import patientRouter from './routes/patientRouter.js'
+import appointmentRouter from './routes/appointmentRouter.js';
 // import helmet from 'helmet';
 
 
@@ -25,7 +25,7 @@ app.use(cors({
 
 app.use("/auth", authRouter)
 app.use('/files', AuthMiddleware, fileRouter);
-app.use("/patients", PatientRouter);
+app.use("/patients", patientRouter);
 app.use("/appointments", appointmentRouter);
 
 const startServer = async () => {
