@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser'
 import AuthMiddleware from './middleware/authMiddleware.js'
 import cors from 'cors';
 import patientRouter from './routes/patientRouter.js'
-import appointmentRouter from './routes/appointmentRouter.js';
+import {appointmentRouter} from './routes/appointmentRouter.js';
 // import helmet from 'helmet';
 
 
