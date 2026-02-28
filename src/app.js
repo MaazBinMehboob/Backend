@@ -1,11 +1,13 @@
 import express from 'express'
 import {connectdb} from './config/db.js'
 import dotenv from 'dotenv'
-import { authRouter } from './router/authRouter.js'
-import { fileRouter } from './router/fileRouter.js'
+import { authRouter } from './routes/authRouter.js'
+import { fileRouter } from './routes/fileRouter.js'
 import cookieParser from 'cookie-parser'
 import AuthMiddleware from './middleware/authMiddleware.js'
 import cors from 'cors';
+import PatientRouter from './routes/patientRouter.js'
+import appointmentRouter from "./routes/appointmentRouter.js";
 // import helmet from 'helmet';
 
 
@@ -23,6 +25,8 @@ app.use(cors({
 
 app.use("/auth", authRouter)
 app.use('/files', AuthMiddleware, fileRouter);
+app.use("/patients", PatientRouter);
+app.use("/appointments", appointmentRouter);
 
 const startServer = async () => {
   try {

@@ -15,6 +15,19 @@ const userSchema = new Schema({
         trim: true,
         lowercase: true
     },
+
+    role: {
+        type: String,
+        enum: ["admin", "doctor", "receptionist", "patient"],
+        default: "patient"
+    },
+
+    subscriptionPlan: {
+        type: String,
+        enum: ["free", "pro"],
+        default: "free"
+    },
+
     email: {
         type: String,
         required: true,
