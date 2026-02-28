@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://maazbinmehboob-hackathon.vercel.app",
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 // app.use(helmet());
