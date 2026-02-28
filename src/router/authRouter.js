@@ -4,28 +4,20 @@ import { User } from "../model/authSchema.js";
 import { validateLogin, validateSignup } from "../lib/utils.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import AuthMiddleware from "../middleware/authMiddleware.js";
 
 dotenv.config();
 
 const authRouter = express.Router();
 
-authRouter.get("/me", async (req, res) => {
+authRouter.get("/me", AuthMiddleware, async (req, res) => {
     try {
-        const token = req.cookies.token;
-
-        if (!token) {
-            return res.status(401).json({ error: "Not authenticated" });
-        }
-
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
         return res.status(200).json({
             success: true,
-            userId: decoded.id
+            user: req.user 
         });
-
     } catch (error) {
-        res.status(401).json({ error: "Invalid token" });
+        res.status(500).json({ error: "Something went wrong" });
     }
 });
 
@@ -90,15 +82,16 @@ authRouter.post("/login", async (req, res) => {
         const token = await user.getJwt();
 
         // Set cookie
-
         res.cookie("token", token, {
             httpOnly: true,
+            secure: true,   // only over HTTPS
+            sameSite: "none", // cross-site requests ke liye
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
         });
-
+     
         res.status(200).json({
             message: "User logged in successfully"
-            
+
         });
 
     } catch (error) {
