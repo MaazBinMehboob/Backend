@@ -9,10 +9,10 @@ import {
   getPatientAppointments,
 } from "../controllers/appointmentController.js";
 
-const router = express.Router();
+const appointmentRouter = express.Router();
 
 /* -------- Book Appointment -------- */
-router.post(
+appointmentRouter.post(
   "/book",
   AuthMiddleware,
   authorizeRoles("receptionist", "patient"),
@@ -20,7 +20,7 @@ router.post(
 );
 
 /* -------- Update Appointment Status -------- */
-router.put(
+appointmentRouter.put(
   "/:id/status",
   AuthMiddleware,
   authorizeRoles("doctor", "receptionist"),
@@ -28,7 +28,7 @@ router.put(
 );
 
 /* -------- Get Doctor Appointments -------- */
-router.get(
+appointmentRouter.get(
   "/doctor/:doctorId",
   AuthMiddleware,
   authorizeRoles("doctor"),
@@ -36,11 +36,11 @@ router.get(
 );
 
 /* -------- Get Patient Appointments -------- */
-router.get(
+appointmentRouter.get(
   "/patient/:patientId",
   AuthMiddleware,
   authorizeRoles("patient", "receptionist", "admin"),
   getPatientAppointments
 );
 
-export { router as appointmentRouter };
+export { appointmentRouter };

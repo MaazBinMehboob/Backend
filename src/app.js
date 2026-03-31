@@ -8,6 +8,7 @@ import AuthMiddleware from './middleware/authMiddleware.js'
 import cors from 'cors';
 import {patientRouter} from './routes/patientRouter.js'
 import {appointmentRouter} from './routes/appointmentRouter.js';
+import { doctorRouter } from './routes/doctorRouter.js';
 // import helmet from 'helmet';
 
 
@@ -21,12 +22,13 @@ app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
-// app.use(helmet());
+
 
 app.use("/auth", authRouter)
 app.use('/files', AuthMiddleware, fileRouter);
 app.use("/patients", patientRouter);
 app.use("/appointments", appointmentRouter);
+app.use("/doctors", doctorRouter);
 
 const startServer = async () => {
   try {
